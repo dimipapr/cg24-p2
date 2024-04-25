@@ -21,7 +21,7 @@ class Transform:
         Rotate the transformation matrix.
 
         Args:
-            theta(float): Angle of rotation in (TODO radians or degrees?)
+            theta(float): Angle of rotation in radians.
             u(numpy.ndarray): Axis of rotation
         """
         
