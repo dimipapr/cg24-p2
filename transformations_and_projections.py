@@ -25,6 +25,10 @@ class Transform:
             u(numpy.ndarray): Axis of rotation
         """
         
+        a = np.array([
+            
+        ])
+
         pass
 
     def translate(self, t: np.ndarray) -> None:
