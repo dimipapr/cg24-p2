@@ -1,4 +1,5 @@
 import numpy as np
+from typing import Tuple
 
 class Transform:
     """
@@ -77,3 +78,101 @@ class Transform:
             result[i] = res_h[0:3]
 
         return result
+
+def world2view(
+        pts:np.ndarray,
+        R:np.ndarray,
+        c0:np.ndarray,
+) -> np.ndarray:
+    """
+    Transforms input points from world coordinate system to camera c.s..
+    Args:
+        pts(numpy.ndarray): N by 3 matrix with 3d points per row
+        R(numpy.ndarray): 3 by 3 matrix representing rotation of 
+            new c.s.
+        c0(numpy.ndarray): 3d origin point of new cs
+    Returns:
+        transformed_points(numpy.ndarray): N by 3 matrix with the input
+            point coordinates in the camera coordinate system.
+    """
+    pass
+
+def lookat(
+        eye:np.ndarray,
+        up:np.ndarray,
+        target:np.ndarray,
+) -> Tuple[np.ndarray,np.ndarray]:
+    """
+    Calculates and returns a Tuple containing a rotation matrix and
+        a translation vector needed to perform a transformation from
+        wcs to ccs.
+    Args:
+        eye(numpy.ndarray): 3d vector representing camera center
+        up(numpy.ndarray): 3d vector representing camera up orientation
+        target(numpy.ndarray): 3d vector representing camera lens target
+    Returns:
+       Tuple[
+            R(numpy.ndarray): 3 by 3 Rotation matrix
+            t(numpy.ndarray): 3d Translation vector
+        ]: Rotation and translation to be applied to transform from 
+            wcs to c(amera)cs
+    """
+    pass
+
+def perspective_project(
+        pts: np.ndarray,
+        focal: float,
+        R: np.ndarray,
+        t: np.ndarray,
+) -> Tuple[np.ndarray, np.ndarray]:
+    """
+    Projects the specified 3d points on the image plane, according
+        to a pinhole perspective projection model.
+    Args:
+        pts     (numpy.ndarray) :   N by 3 matrix of input points(point per row)
+        focal   (float)         :   Distance from camera surface to pinhole
+        R       (numpy.ndarray) :   3 by 3 camera cs rotation matrix
+        t       (numpy.ndarray) :   3d camera cs origin point
+
+    Returns:
+        projected_points    (numpy.ndarray) : N by 2, 2d coordinates of
+            N inpup points on the camera surface
+    """
+    pass
+
+def rasterize(
+        pts_2d:     np.ndarray,
+        plane_w:    int,
+        plane_h:    int,
+        res_w:      int,
+        res_h:      int,  
+) -> np.ndarray:
+    """
+    Rasterizes the input 2d coordinates from the camera plane to image
+        pixel coordinates
+    Args:
+        pts_2d  (numpy.ndarray): input 2d points on camera plane
+        plane_w (int): camera plane width
+        plane_h (int): camera plane height
+        res_w   (int): output image resolution width
+        res_h   (int): output image resolution height
+    """
+    pass
+
+def render_object(
+        v_pos:np.ndarray,
+        v_clr:np.ndarray,
+        t_pos_idx:np.ndarray,
+        plane_h:int,
+        plane_w:int,
+        res_h:int,
+        res_w:int,
+        focal:float,
+        eye:np.ndarray,
+        up:np.ndarray,
+        target:np.ndarray,
+) -> np.ndarray:
+    """
+    Render the specified object as viewed from the specified camera.
+    """
+    pass
