@@ -49,12 +49,13 @@ class Transform:
 
     def translate(self, t: np.ndarray) -> None:
         """
-        Translate the transformation matrix.
+        Update the Transform.mat to apply a translation by a vector t.
 
         Args:
             t(np.ndarray): Translation vector
         """
-        pass
+        assert t.size == 3
+        self.mat[0:3,3] = t    
 
     def transform_pts(self, pts: np.ndarray) -> np.ndarray:
         """
