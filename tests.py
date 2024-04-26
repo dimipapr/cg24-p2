@@ -38,5 +38,27 @@ class TestTransformTranslate(unittest.TestCase):
             [0,0,0,1],
         ])
         self.assertTrue((tr.mat == expected_result).all())
+
+class TestTransformTransformPts(unittest.TestCase):
+    def test_basic(self):
+        starting_points = np.array([
+            [1,0,0], #point 1
+            [0,1,0], #point 2
+            [0,0,1], #point 3
+        ])
+        #create transform
+        tr = tp.Transform()
+        rot_axis = np.array([1,0,0])
+        rot_theta = np.pi
+        translation_vector = np.array([1,1,1])
+        tr.rotate(rot_theta,rot_axis)
+        tr.translate(translation_vector)
+        transformed_points = tr.transform_pts(starting_points)
+        expected_result = np.array([
+            [2,1,1],
+            [1,0,1],
+            [1,1,0],
+        ])
+        self.assertTrue((transformed_points == expected_result).all())
 if __name__=="__main__":
     unittest.main()
