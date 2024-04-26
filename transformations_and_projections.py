@@ -66,4 +66,5 @@ class Transform:
             pts(numpy.ndarray): Points (N) to apply the transformation on.
                 Matrix size = Nx3
         """
-        pass
+        result = np.zeros(pts.shape)
+        return result
