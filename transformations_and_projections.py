@@ -18,12 +18,17 @@ class Transform:
 
     def rotate(self, theta: float, u: np.ndarray) -> None:
         """
-        Rotate the transformation matrix.
+        Calculate the rotation matrix corresponding to clockwise
+        rotation around axis u by theta radians and update the
+        mat attribute accordingly.
 
         Args:
             theta(float): Angle of rotation in radians.
             u(numpy.ndarray): Axis of rotation
         """
+        assert u.ndim == 1
+        assert u.size == 3
+        assert np.linalg.norm(u)==1
         (ux,uy,uz) = u
         a = np.array([
             [ux*ux, ux*uy, ux*uz],
