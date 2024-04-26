@@ -3,15 +3,13 @@ import numpy as np
 
 import transformations_and_projections as tp
 
-class TestTransform(unittest.TestCase):
-    def setUp(self) -> None:
-        return super().setUp()
-    def tearDown(self) -> None:
-        return super().tearDown()
+class TestTransformInit(unittest.TestCase):
     def test_init_transform_as_unitary(self):
         obj = tp.Transform()
         self.assertTrue((obj.mat == np.identity(4)).all(),
                          "Transform matrix does not initialize to identity matrix.")
+
+class TestTransformRotate(unittest.TestCase):
     def test_rotate_x_pi_quarter(self):
         tr = tp.Transform()
         u = np.array([1,0,0])
