@@ -66,5 +66,14 @@ class Transform:
             pts(numpy.ndarray): Points (N) to apply the transformation on.
                 Matrix size = Nx3
         """
+        assert pts.shape[1] == 3
+
         result = np.zeros(pts.shape)
+
+        for i in range(pts.shape[0]):
+            p_h = np.ones(4)
+            p_h[0:3] = pts[i]
+            res_h = np.matmul(self.mat,p_h)
+            result[i] = res_h[0:3]
+
         return result
