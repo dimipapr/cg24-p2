@@ -26,5 +26,17 @@ class TestTransformRotate(unittest.TestCase):
             "Rotation matrix for rot x by pi/4 is not as expected!",
         )
 
+class TestTransformTranslate(unittest.TestCase):
+    def test_translate_x_by1(self):
+        tr = tp.Transform()
+        t = np.array([1,0,0])
+        tr.translate(t)
+        expected_result = np.array([
+            [1,0,0,1],
+            [0,1,0,0],
+            [0,0,1,0],
+            [0,0,0,1],
+        ])
+        self.assertTrue((tr.mat == expected_result).all())
 if __name__=="__main__":
     unittest.main()
