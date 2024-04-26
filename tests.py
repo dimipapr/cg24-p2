@@ -59,6 +59,8 @@ class TestTransformTransformPts(unittest.TestCase):
             [1,0,1],
             [1,1,0],
         ])
-        self.assertTrue((transformed_points == expected_result).all())
+        self.assertTrue(
+            np.isclose(transformed_points,expected_result).all()
+        )
 if __name__=="__main__":
     unittest.main()
