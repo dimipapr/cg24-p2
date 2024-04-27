@@ -62,5 +62,22 @@ class TestTransformTransformPts(unittest.TestCase):
         self.assertTrue(
             np.isclose(transformed_points,expected_result).all()
         )
+
+class TestLookat(unittest.TestCase):
+    def test_lookat_basic(self):
+        eye = np.array([10,10,10])
+        sqrt2 = np.sqrt(2)
+        up = np.array([sqrt2/2,sqrt2/2,0])
+        target = np.array([3,1,-1])
+        R,d = tp.lookat(eye,up,target)
+        self.assertTrue(True)
+        expectedR = np.array([
+            [-0.7013,0.5594,-0.4418],
+            [0.7013, 0.4306, -0.5681],
+            [-0.1275,-0.7083,-0.6943],
+        ])
+        expectedD = np.array([10,10,10])
+        self.assertTrue(np.isclose(R,expectedR,atol=0.0001).all())
+        self.assertTrue(np.isclose(d,expectedD,atol=0.0001).all())
 if __name__=="__main__":
     unittest.main()
