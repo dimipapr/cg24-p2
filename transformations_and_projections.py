@@ -117,7 +117,22 @@ def lookat(
         ]: Rotation and translation to be applied to transform from 
             wcs to c(amera)cs
     """
-    pass
+    assert eye.shape == (3,) , "'eye' should be a 3d vector"
+    assert up.shape == (3,) , "'up' should be a 3d vector"
+    assert np.linalg.norm(up) == 1, "'up' should be a unit vector"
+    assert target.shape == (3,) , "'target' should be a 3d vector" 
+    
+    zc = (target - eye) / np.linalg.norm(target-eye)
+    t = up - np.dot(up,zc)*zc
+    yc = t/np.linalg.norm(t)
+    xc = np.cross(yc,zc)
+    R = np.zeros((3,3))
+    R[:,0] = xc
+    R[:,1] = yc
+    R[:,2] = zc
+    t = eye
+
+    return R,t
 
 def perspective_project(
         pts: np.ndarray,
