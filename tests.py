@@ -79,5 +79,30 @@ class TestLookat(unittest.TestCase):
         expectedD = np.array([10,10,10])
         self.assertTrue(np.isclose(R,expectedR,atol=0.0001).all())
         self.assertTrue(np.isclose(d,expectedD,atol=0.0001).all())
+
+class TestWorld2View(unittest.TestCase):
+    def test_world2view_basic(self):
+        R = np.array([
+            [0,1,0],
+            [1,0,0],
+            [0,0,1]
+        ])
+        c0 = np.array([1,1,1])
+        pts = np.array([
+            [3, 0, 4],
+            [9, 7, 5],
+            [9, 2, 0],
+            [0, 3, 3],
+            [0, 9, 3]
+        ])
+        t_pts = tp.world2view(pts,R,c0)
+        expected_pts = np.array([
+            [-1.,  2.,  3.],
+            [ 6.,  8.,  4.],
+            [ 1.,  8., -1.],
+            [ 2., -1.,  2.],
+            [ 8., -1.,  2.]
+        ])
+        self.assertTrue(np.isclose(t_pts,expected_pts).all())
 if __name__=="__main__":
     unittest.main()
