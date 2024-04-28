@@ -95,7 +95,16 @@ def world2view(
         transformed_points(numpy.ndarray): N by 3 matrix with the input
             point coordinates in the camera coordinate system.
     """
-    pass
+    ph = np.ones(4)
+    transformation_matrix = np.ones((4,4))
+    transformation_matrix[0:3,0:3] = R
+    transformation_matrix[0:3,3] = np.matmul(-R.T,c0)
+    transformed_pts = np.zeros(pts.shape)
+    for i in range(pts.shape[0]):
+        ph[0:3] = pts[i]
+        tph = np.matmul(transformation_matrix,ph)
+        transformed_pts[i,:] = tph[0:3]
+    return transformed_pts
 
 def lookat(
         eye:np.ndarray,
