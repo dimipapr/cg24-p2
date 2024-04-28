@@ -135,10 +135,7 @@ def lookat(
     t = up - np.dot(up,zc)*zc
     yc = t/np.linalg.norm(t)
     xc = np.cross(yc,zc)
-    R = np.zeros((3,3))
-    R[:,0] = xc
-    R[:,1] = yc
-    R[:,2] = zc
+    R = np.array([xc,yc,zc]).T
     t = eye
 
     return R,t
@@ -154,7 +151,7 @@ def perspective_project(
         to a pinhole perspective projection model.
     Args:
         pts     (numpy.ndarray) :   N by 3 matrix of input points(point per row)
-        focal   (float)         :   Distance from camera surface to pinhole
+        focal   (float)         :   Distance from camera plane to pinhole
         R       (numpy.ndarray) :   3 by 3 camera cs rotation matrix
         t       (numpy.ndarray) :   3d camera cs origin point
 
