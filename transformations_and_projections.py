@@ -159,7 +159,12 @@ def perspective_project(
         projected_points    (numpy.ndarray) : N by 2, 2d coordinates of
             N inpup points on the camera surface
     """
-    pass
+    #transform points to camera cs
+    ccs_pts = world2view(pts,R,t)
+    camera_plane_points = np.zeros((ccs_pts.shape[0],2))
+    for i in range(camera_plane_points.shape[0]):
+        camera_plane_points[i] = ccs_pts[i,0:2]/ccs_pts[i,2]
+    return camera_plane_points
 
 def rasterize(
         pts_2d:     np.ndarray,
