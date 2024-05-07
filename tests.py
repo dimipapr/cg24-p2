@@ -118,5 +118,21 @@ class TestPerspectiveProject(unittest.TestCase):
         self.assertTrue(np.equal(projected_points,points[:,0:2]).all())
         self.assertTrue(np.equal(points_depth,depth).all())
         
+class TestRasterize(unittest.TestCase):
+    def testBasic(self):
+        plane_w = 10
+        plane_h = 10
+        res_w = 400
+        res_h = 400
+        pts_2d = np.array([
+            [-5,-5],
+            [4.99,4.99],
+        ])
+        expected_result = np.array([
+            [0,0],
+            [399,399],
+        ])
+        result = tp.rasterize(pts_2d,plane_w,plane_h,res_w,res_h)
+        self.assertTrue(np.equal(result,expected_result).all())
 if __name__=="__main__":
     unittest.main()
