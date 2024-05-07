@@ -189,7 +189,7 @@ def rasterize(
         rasterized_pts (numpy.ndarray): 2d image pixel coordinates
     """
     rasterized_pts = np.zeros(pts_2d.shape)
-    rasterized_pts[:,0] = np.floor((pts_2d[:,0]+plane_h/2)/plane_h*res_h)
+    rasterized_pts[:,0] =res_h - 1 - np.floor((pts_2d[:,0]+plane_h/2)/plane_h*res_h)
     rasterized_pts[:,1] = np.floor((pts_2d[:,1]+plane_w/2)/plane_w*res_w)
     return rasterized_pts
 
@@ -208,5 +208,19 @@ def render_object(
 ) -> np.ndarray:
     """
     Render the specified object as viewed from the specified camera.
+    Args:
+        v_pos (numpy.ndarray): Nx3 object vertices 3d coordinates
+        v_clr (numpy.ndarray): Nx3 vertice rgb colors
+        t_pos_idx (numpy.ndarray): Fx3 object triangles
+        plane_h (int): camera plane height
+        plane_w (int): camera plane width
+        res_h (int): camera resolution (height)
+        res_w (int): camera resolution (width)
+        focal (int): camera focal length
+        eye(numpy.ndarray): camera center in WCS
+        up (numpy.ndarray): camera up vector
+        target(numpy.ndarray): camera lens target point
+    Returns:
+        img (numpy.ndarray): rendered object as viewed from given camera
     """
     pass

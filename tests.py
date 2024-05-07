@@ -129,8 +129,8 @@ class TestRasterize(unittest.TestCase):
             [4.99,4.99],
         ])
         expected_result = np.array([
-            [0,0],
-            [399,399],
+            [399,0],
+            [0,399],
         ])
         result = tp.rasterize(pts_2d,plane_w,plane_h,res_w,res_h)
         self.assertTrue(np.equal(result,expected_result).all())
