@@ -1,4 +1,5 @@
 import numpy as np
+import tripaint as tp
 from typing import Tuple
 
 class Transform:
@@ -191,6 +192,7 @@ def rasterize(
     rasterized_pts = np.zeros(pts_2d.shape)
     rasterized_pts[:,0] =res_h - 1 - np.floor((pts_2d[:,0]+plane_h/2)/plane_h*res_h)
     rasterized_pts[:,1] = np.floor((pts_2d[:,1]+plane_w/2)/plane_w*res_w)
+    rasterized_pts.astype(np.int64)
     return rasterized_pts
 
 def render_object(
@@ -223,4 +225,21 @@ def render_object(
     Returns:
         img (numpy.ndarray): rendered object as viewed from given camera
     """
-    pass
+    img = np.ones(res_h,res_w)
+    R,t = lookat(eye,up,target)
+    projected_points,depth = perspective_project(v_pos,focal,R,t)
+    rasterized_projected_points = rasterize(
+        projected_points,
+        plane_w,
+        plane_h,
+        res_w,
+        res_h
+    )
+    img = tp.render_img(
+        t_pos_idx,
+        rasterized_projected_points,
+        v_clr,
+        depth,
+        "gouraud"
+    )
+    return img
