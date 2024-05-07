@@ -185,8 +185,13 @@ def rasterize(
         plane_h (int): camera plane height
         res_w   (int): output image resolution width
         res_h   (int): output image resolution height
+    Returns:
+        rasterized_pts (numpy.ndarray): 2d image pixel coordinates
     """
-    pass
+    rasterized_pts = np.zeros(pts_2d.shape)
+    rasterized_pts[:,0] = np.floor((pts_2d[:,0]+plane_h/2)/plane_h*res_h)
+    rasterized_pts[:,1] = np.floor((pts_2d[:,1]+plane_w/2)/plane_w*res_w)
+    return rasterized_pts
 
 def render_object(
         v_pos:np.ndarray,
