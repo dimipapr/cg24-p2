@@ -162,9 +162,12 @@ def perspective_project(
     #transform points to camera cs
     ccs_pts = world2view(pts,R,t)
     camera_plane_points = np.zeros((ccs_pts.shape[0],2))
+    ccs_pts_depth = np.zeros(ccs_pts.shape[0])
     for i in range(camera_plane_points.shape[0]):
-        camera_plane_points[i] = ccs_pts[i,0:2]/ccs_pts[i,2]
-    return camera_plane_points
+        point_z = ccs_pts[i,2]
+        camera_plane_points[i] = ccs_pts[i,0:2]*focal/point_z
+        ccs_pts_depth[i] = point_z/focal
+    return camera_plane_points, ccs_pts_depth
 
 def rasterize(
         pts_2d:     np.ndarray,
