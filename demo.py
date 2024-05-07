@@ -78,8 +78,9 @@ ax1.imshow(img1)
 fig1.savefig("output/original_r.png")
 
 #translation 0
+transform = tp.Transform()
 transform.translate(t_0)
-v_pos_2 = transform.transform_pts(v_pos)
+v_pos_2 = transform.transform_pts(v_pos_1)
 img2 = tp.render_object(
     v_pos_2,
     v_clr,
@@ -100,8 +101,9 @@ ax2.imshow(img2)
 fig2.savefig("output/original_r_t.png")
 
 #translation 1
+transform = tp.Transform()
 transform.translate(t_1)
-v_pos_3 = transform.transform_pts(v_pos)
+v_pos_3 = transform.transform_pts(v_pos_2)
 img3 = tp.render_object(
     v_pos_3,
     v_clr,
