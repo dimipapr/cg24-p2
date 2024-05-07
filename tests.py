@@ -107,14 +107,16 @@ class TestWorld2View(unittest.TestCase):
 class TestPerspectiveProject(unittest.TestCase):
     def testBasic(self):
         points = np.array([
-            [1,2,3],
-            [2,3,4],
-            [3,4,5]
+            [1,2,1],
+            [2,3,1],
+            [3,4,1]
         ])
+        points_depth = points[:,2]
         R = np.identity(3)
-        c0 = np.array([1,1,1])
-        projected_points = tp.perspective_project(points,1,R,c0)
-        self.assertTrue(True)
+        c0 = np.array([0,0,0])
+        projected_points,depth = tp.perspective_project(points,1,R,c0)
+        self.assertTrue(np.equal(projected_points,points[:,0:2]).all())
+        self.assertTrue(np.equal(points_depth,depth).all())
         
 if __name__=="__main__":
     unittest.main()
