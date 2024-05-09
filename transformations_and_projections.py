@@ -4,7 +4,6 @@ from typing import Tuple
 
 class Transform:
     """
-    TODO some real docstring
     A class for preforming affine transformations
     
     Attributes:
